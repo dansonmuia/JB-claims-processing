@@ -87,7 +87,7 @@ async def admin(db_session):
 @pytest_asyncio.fixture
 async def auth_headers(client, admin):
     response = await client.post(
-        "/api/auth/login-for-token-no-2fa",
+        "/api/auth/login-for-token",
         json={"email": admin.email, "password": TEST_ADMIN_PASSWORD},
     )
     assert response.status_code == 200, response.text
