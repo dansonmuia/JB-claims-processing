@@ -29,6 +29,7 @@ COPY --from=builder /opt/venv /opt/venv
 COPY . .
 
 RUN mkdir -p /var/log/jubilee_claims_processing \
+    && chmod +x entrypoint.sh \
     && useradd --create-home --shell /bin/bash appuser \
     && chown -R appuser:appuser /app /var/log/jubilee_claims_processing
 
@@ -36,4 +37,5 @@ USER appuser
 
 EXPOSE 8000
 
+ENTRYPOINT ["./entrypoint.sh"]
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

@@ -7,6 +7,10 @@ DEFAULT_SUPERADMIN_EMAIL = os.getenv('DEFAULT_SUPERADMIN_EMAIL')
 DEFAULT_SUPERADMIN_MSISDN = os.getenv('DEFAULT_SUPERADMIN_MSISDN')
 DEFAULT_SUPERADMIN_PASSWORD = os.getenv('DEFAULT_SUPERADMIN_PASSWORD')
 
+# Seeding (see Backend/seed.py). Off by default; the docker-compose .env.example
+# turns it on so the portal has sample data to show right after `docker compose up`.
+SEED_DEMO_DATA = os.getenv('SEED_DEMO_DATA', 'false').lower() == 'true'
+
 
 # SECRETS
 JWT_SECRET = os.getenv('JWT_SECRET')
