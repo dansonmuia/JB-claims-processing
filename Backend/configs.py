@@ -17,6 +17,10 @@ JWT_SECRET = os.getenv('JWT_SECRET')
 JWT_EXPIRY_HOURS = 3
 
 
+# CORS (browser-facing origins allowed to call this API, e.g. the Next.js frontend)
+CORS_ORIGINS = [origin.strip() for origin in os.getenv('CORS_ORIGINS', 'http://localhost:3000').split(',') if origin.strip()]
+
+
 # DB
 POSTGRES_DB = os.getenv('POSTGRES_DB')
 POSTGRES_USER = os.getenv('POSTGRES_USER')
