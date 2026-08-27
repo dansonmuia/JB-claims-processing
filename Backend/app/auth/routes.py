@@ -47,7 +47,7 @@ async def login_for_token(email: str, password: str, db: AsyncSession):
 
 
 @router.post('/login-for-token', response_model=schemas.AdminLoginResponse)
-async def login_without_2fa(credentials: schemas.AuthSchema, db: AsyncSession = Depends(get_db_async)):
+async def login_for_token(credentials: schemas.AuthSchema, db: AsyncSession = Depends(get_db_async)):
     response, admin = await login_for_token(credentials.email, credentials.password, db)
     logging.info(f'Login successful for: {credentials.email}', extra={'admin_id': admin.id})
 
