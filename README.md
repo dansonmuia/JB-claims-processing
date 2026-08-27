@@ -1,8 +1,6 @@
 # JB Claims Processing
 
-Insurance claims processing system built for the JB take-home exercise. FastAPI
-backend exposing a claims API, Next.js admin portal on top of it, Postgres for
-storage.
+Simple claims processing application. Built on fastapi, and a nextjs portal. Uses postgress for persistence. Simple rest api
 
 ## Features
 
@@ -36,7 +34,7 @@ storage.
 └── .env.example
 ```
 
-## Stack
+## Stack choices
 
 | Choice | Reason |
 |---|---|
