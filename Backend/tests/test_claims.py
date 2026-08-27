@@ -80,3 +80,38 @@ async def test_valid_status_transition_succeeds(client, auth_headers, policy):
 
     assert response.status_code == 200
     assert response.json()["status"] == "UNDER_REVIEW"
+
+
+async def test_rejected_claim_cannot_move_to_paid(client, auth_headers, policy):
+    create_response = await client.post(
+        "/api/claims/",
+        headers=auth_headers,
+        json={
+            "claim_number": "CLM-TRANSITION-3",
+            "policy_id": str(policy.id),
+            "claim_type": "TRAVEL",
+            "claim_amount": 300,
+            "incident_date": "2026-03-01",
+        },
+    )
+    claim_id = create_response.json()["id"]
+
+    await client.patch(
+        f"/api/claims/{claim_id}",
+        headers=auth_headers,
+        json={"claim_amount": 300, "incident_date": "2026-03-01", "status": "UNDER_REVIEW"},
+    )
+    rejected_response = await client.patch(
+        f"/api/claims/{claim_id}",
+        headers=auth_headers,
+        json={"claim_amount": 300, "incident_date": "2026-03-01", "status": "REJECTED"},
+    )
+    assert rejected_response.status_code == 200
+    assert rejected_response.json()["status"] == "REJECTED"
+
+    paid_response = await client.patch(
+        f"/api/claims/{claim_id}",
+        headers=auth_headers,
+        json={"claim_amount": 300, "incident_date": "2026-03-01", "status": "PAID"},
+    )
+    assert paid_response.status_code == 400

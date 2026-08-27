@@ -100,7 +100,7 @@ async def update_claim(
         next_allowed_status = m.ClaimStatusEnum.UNDER_REVIEW
     elif claim.status == m.ClaimStatusEnum.UNDER_REVIEW:
         next_allowed_status = [m.ClaimStatusEnum.APPROVED, m.ClaimStatusEnum.REJECTED]
-    elif claim.status in [m.ClaimStatusEnum.APPROVED, m.ClaimStatusEnum.REJECTED]:
+    elif claim.status == m.ClaimStatusEnum.APPROVED:
         next_allowed_status = m.ClaimStatusEnum.PAID
 
     if claim_in.status and claim_in.status != claim.status:

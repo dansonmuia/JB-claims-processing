@@ -18,8 +18,8 @@ export function nextAllowedStatuses(status: ClaimStatus): ClaimStatus[] {
     case "UNDER_REVIEW":
       return ["APPROVED", "REJECTED"];
     case "APPROVED":
-    case "REJECTED":
       return ["PAID"];
+    case "REJECTED":
     case "PAID":
       return [];
     default:
