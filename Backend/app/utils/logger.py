@@ -1,4 +1,5 @@
 import logging
+import os
 from logging.handlers import RotatingFileHandler
 from pythonjsonlogger.json import JsonFormatter
 
@@ -6,6 +7,7 @@ import configs
 
 
 LOG_FILE = configs.PORTAL_API_LOG_FILE
+os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
 
 
 class SafeExtraFormatter(logging.Formatter):

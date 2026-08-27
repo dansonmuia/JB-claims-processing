@@ -27,4 +27,4 @@ SQLALCHEMY_DATABASE_URL_ASYNC = f'postgresql+asyncpg://{POSTGRES_USER}:{POSTGRES
 MAX_LOG_BYTES = 1 * 1024 * 30 # 30MB
 MAX_LOG_BACKUPS = 1
 
-PORTAL_API_LOG_FILE = '/var/log/jubilee_claims_processing/portal_api.log'
+PORTAL_API_LOG_FILE = os.getenv('PORTAL_API_LOG_FILE', '/var/log/jubilee_claims_processing/portal_api.log')

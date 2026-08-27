@@ -1,4 +1,5 @@
 from datetime import datetime
+from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict
 
@@ -27,7 +28,8 @@ class ClaimUpdateSchema(BaseModel):
 
 
 class ClaimOutSchema(ClaimBaseSchema):
-    id: str
+    id: UUID
+    policy_id: UUID
     status: models.ClaimStatusEnum
 
     model_config = ConfigDict(from_attributes=True)

@@ -88,7 +88,8 @@ async def update_claim(
         f'Update claim(id:{claim_id}) request by admin id: {current_admin.id}',
         extra={'admin_id': current_admin.id}
     )
-    q = select(m.Claim).where(m.Claim.id == claim_id)
+
+    q = select(m.Claim).where(m.Claim.id == claim_id).with_for_update()
     result = await db.execute(q)
     claim: m.Claim | None = result.scalars().first()
     if not claim:
