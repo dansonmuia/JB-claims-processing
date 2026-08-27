@@ -3,7 +3,7 @@ import logging
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from fastapi import Depends, HTTPException, Request
+from fastapi import Depends, HTTPException
 from fastapi.security import OAuth2PasswordRequestForm
 
 from app import models as m
@@ -44,13 +44,6 @@ async def login_for_token(email: str, password: str, db: AsyncSession):
             "role": admin.role
         }
     }, admin
-
-
-@router.post('/login-unverified', response_model=schemas.AdminLoginResponse)
-async def login_unverified(credentials: schemas.AuthSchema, request: Request, db: AsyncSession = Depends(get_db_async)):
-    logging.info(f'Initiate login for unverified admin: {credentials.email}')
-    response, admin =  await login_for_token(credentials.email, credentials.password, db)
-    return response
 
 
 @router.post('/login-for-token-no-2fa', response_model=schemas.AdminLoginResponse)
